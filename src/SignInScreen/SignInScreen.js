@@ -11,21 +11,21 @@ export default class SignInScreen extends React.Component {
     this.state = {
       isSignedIn: false // Local signed-in state.
     };
+    // Configure FirebaseUI.
+    this.uiConfig = {
+      // Popup signin flow rather than redirect flow.
+      signInFlow: 'popup',
+      // We will display Google and Facebook as auth providers.
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        // firebase.auth.FacebookAuthProvider.PROVIDER_ID
+      ],
+      callbacks: {
+        signInSuccessWithAuthResult: () => this.props.setSignInState(true)
+      }
+    };
   }
 
-  // Configure FirebaseUI.
-  uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // We will display Google and Facebook as auth providers.
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID
-      // firebase.auth.FacebookAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-      signInSuccessWithAuthResult: () => this.props.setSignInState(true)
-    }
-  };
 
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
