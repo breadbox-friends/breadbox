@@ -6,11 +6,21 @@ import GroceryItem from './GroceryItem/GroceryItem'
 
 function App() {
   const [userSignedIn, setSignIn] = useState(false);
+  const mockFetchItems = [ 
+    {
+      title: 'Apple Watermelon',
+      desc: 'Watermelon flavoured apple!'
+    },
+    {
+      title: 'Lemon Water',
+      desc: 'Water flavoured lemon!'
+    }
+   ]
 
   return userSignedIn ? (
     <div className="App">
       <h1>{`Welcome to BreadBox, ${firebase.auth().currentUser.displayName}`}</h1>
-      <header className="App-header">
+      <header>
         <img src={firebase.auth().currentUser.photoURL} className="App-logo" alt="logo" />
       </header>
       <button onClick={() => {
@@ -19,8 +29,15 @@ function App() {
         }
       }>Click here to sign-out</button>
 
+
       <div>
-        <GroceryItem itemDesc='card description yo'/>
+        { 
+          mockFetchItems.map(item => (
+            <GroceryItem 
+              itemTitle={item.title}
+              itemDesc={item.desc}/>
+          ))
+        }
       </div>
         
     </div>
