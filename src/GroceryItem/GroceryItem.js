@@ -1,11 +1,17 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 const GroceryItem = (props) => {
     return (
-        <div>
-            <div>{props.itemTitle}</div>
-            <div>{props.itemDesc}</div>
-        </div>
+        <Card style={{ width: "18rem" }}>
+            <Card.Img variant="top" src={props.imgUrl} />
+            <Card.Body>
+              <Card.Title>{props.itemTitle}</Card.Title>
+              <Card.Text>
+                {props.itemDesc}
+              </Card.Text>
+            </Card.Body>
+        </Card>
     )
 }
 
