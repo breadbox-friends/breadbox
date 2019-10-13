@@ -13,6 +13,16 @@
 .col-nav-burger {
   margin: auto;
 }
+
+.body-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 0;
+  justify-content: space-evenly; 
+}
+
+
 /* Bootstrap Media Queries
 @media (min-width: 576px) {}
 
