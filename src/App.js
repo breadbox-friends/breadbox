@@ -49,7 +49,6 @@ function App() {
           </Navbar.Brand>
           <Row>
             <Col className="col-user-icon">
-              {/*  */}
               <UserIcon iconSrc={firebase.auth().currentUser.photoURL} />
             </Col>
             <Col className="col-nav-burger">
@@ -87,26 +86,27 @@ function App() {
           </Row>
         </Container>
       </Navbar>
-      <Container>
-        <Row>
+
+      <Container className={'body-container'}>
           {/* render grocery item */}
           {mockFetchItems.map(item => (
-            <GroceryItem 
-            itemTitle={item.title} 
-            itemDesc={item.desc}
-            imgUrl={item.img} />
+              <GroceryItem 
+              itemTitle={item.title} 
+              itemDesc={item.desc}
+              imgUrl={item.img}
+              // replace with item.id in the future
+              key={item.title} />
           ))}
-        </Row>
-
-        <button
+      </Container>
+      
+      {/* dangling here */}
+      <button
           onClick={() => {
             firebase.auth().signOut();
             setSignIn(false);
           }}
         >Click here to sign-out
-        </button>
-      </Container>
-
+      </button>
 
     </React.Fragment>
   ) : (
