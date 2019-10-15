@@ -2,8 +2,13 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import Fuse from 'fuse.js';
 
-const FuzzySearchBar = ({ setFuzzyResult, searchSpace }) => {
+const FuzzySearchBar = ({ setSearchResult, searchSpace, searchOptions }) => {
+
+  const performSearch = () =>
+    new Fuse(searchSpace, searchOptions).search("cheddar");
+
   return (
     <Form inline>
       <FormControl
@@ -11,7 +16,7 @@ const FuzzySearchBar = ({ setFuzzyResult, searchSpace }) => {
         placeholder="Search"
         className="mr-sm-2"
       />
-      <Button onClick={() => setFuzzyResult([searchSpace[0]])} variant="outline-success">Search</Button>
+      <Button onClick={() => setSearchResult(performSearch())} variant="outline-success">Search</Button>
     </Form>
   )
 }

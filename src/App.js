@@ -17,6 +17,19 @@ function App() {
   const [userSignedIn, setSignIn] = useState(false);
   const [groceryItemList, setGroceryItemList] = useState(mockFetchedItems);
 
+  var searchOptions = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      "title",
+      "desc"
+    ]
+  };
+
   return userSignedIn ? (
     <React.Fragment>
       <MainNav />
@@ -24,8 +37,9 @@ function App() {
         <Row>
           <Col>
             <FuzzySearchBar
-              setFuzzyResult={setGroceryItemList}
+              setSearchResult={setGroceryItemList}
               searchSpace={groceryItemList}
+              searchOptions={searchOptions}
             />
           </Col>
         </Row>
