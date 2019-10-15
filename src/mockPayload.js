@@ -1,4 +1,4 @@
-const mockFetchItems = [
+const mockFetchedItems = [
   {
     title: 'Apple Watermelon',
     desc: 'Watermelon flavoured apple!',
@@ -36,4 +36,4 @@ const mockFetchItems = [
   },
  ]
 
- export default mockFetchItems;
+ export default mockFetchedItems;
