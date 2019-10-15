@@ -10,45 +10,11 @@ import FuzzySearchBar from './FuzzySearchBar/FuzzySearchBar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+// Mock fetched payload
+import mockFetchedItems from './mockPayload';
+
 function App() {
   const [userSignedIn, setSignIn] = useState(false);
-  const mockFetchItems = [
-    {
-      title: 'Apple Watermelon',
-      desc: 'Watermelon flavoured apple!',
-      img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
-    },
-    {
-      title: 'Lemon Water',
-      desc: 'Water flavoured lemon!',
-      img: 'https://img.icons8.com/color/64/000000/fenix.png'
-    },
-    {
-      title: 'Apple Watermelon',
-      desc: 'Watermelon flavoured apple!',
-      img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
-    },
-    {
-      title: 'Lemon Water',
-      desc: 'Water flavoured lemon!',
-      img: 'https://img.icons8.com/color/64/000000/fenix.png'
-    },
-    {
-      title: 'Apple Watermelon',
-      desc: 'Watermelon flavoured apple!',
-      img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
-    },
-    {
-      title: 'Lemon Water',
-      desc: 'Water flavoured lemon!',
-      img: 'https://img.icons8.com/color/64/000000/fenix.png'
-    },
-    {
-      title: 'Lemon Water',
-      desc: 'Water flavoured lemon!',
-      img: 'https://img.icons8.com/color/64/000000/fenix.png'
-    },
-   ]
 
   return userSignedIn ? (
     <React.Fragment>
@@ -61,7 +27,7 @@ function App() {
         </Row>
         <Row className='grocery-container-row'>
           <Col className='grocery-container-col'>
-            {mockFetchItems.map(item => (
+            {mockFetchedItems.map(item => (
                 <GroceryItem
                   itemTitle={item.title}
                   itemDesc={item.desc}
