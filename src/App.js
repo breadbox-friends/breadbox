@@ -13,22 +13,22 @@ import Col from 'react-bootstrap/Col';
 // Mock fetched payload
 import mockFetchedItems from './mockPayload';
 
+const SEARCH_OPTIONS = {
+  shouldSort: true,
+  threshold: 0.2,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [
+    "title",
+    "desc"
+  ]
+};
+
 function App() {
   const [userSignedIn, setSignIn] = useState(false);
   const [groceryItemList, setGroceryItemList] = useState(mockFetchedItems);
-
-  var searchOptions = {
-    shouldSort: true,
-    threshold: 0.6,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: [
-      "title",
-      "desc"
-    ]
-  };
 
   return userSignedIn ? (
     <React.Fragment>
@@ -39,7 +39,7 @@ function App() {
             <FuzzySearchBar
               setSearchResult={setGroceryItemList}
               searchSpace={mockFetchedItems}
-              searchOptions={searchOptions}
+              searchOptions={SEARCH_OPTIONS}
             />
           </Col>
         </Row>
