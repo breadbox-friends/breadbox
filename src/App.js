@@ -38,7 +38,7 @@ function App() {
           <Col>
             <FuzzySearchBar
               setSearchResult={setGroceryItemList}
-              searchSpace={groceryItemList}
+              searchSpace={mockFetchedItems}
               searchOptions={searchOptions}
             />
           </Col>
