@@ -10,7 +10,8 @@ const FuzzySearchBar = ({ setSearchResult, searchSpace, searchOptions }) => {
 
   const handleChange = inputEvent => {
     inputEvent.preventDefault();
-    setSearchResult(performSearch(inputEvent.target.value))
+    const result = performSearch(inputEvent.target.value);
+    setSearchResult(result.length === 0 ? searchSpace : result)
   }
 
   return (
