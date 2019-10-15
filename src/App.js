@@ -37,13 +37,9 @@ function App() {
         <Row>
           <Col>
             <FuzzySearchBar
-              setSearchResult={searchResult => {
-                if(searchResult.length === 0) {
-                  setGroceryItemList(mockFetchedItems);
-                } else {
-                  setGroceryItemList(searchResult);
-                }
-              }}
+              noInputHandler={() => setGroceryItemList(mockFetchedItems)}
+              noMatchesHandler={() => setGroceryItemList([])}
+              inputMatchedHandler={searchResult => setGroceryItemList(searchResult)}
               searchSpace={mockFetchedItems}
               searchOptions={SEARCH_OPTIONS}
             />
