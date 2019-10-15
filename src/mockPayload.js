@@ -10,27 +10,27 @@ const mockFetchItems = [
     img: 'https://img.icons8.com/color/64/000000/fenix.png'
   },
   {
-    title: 'Apple Watermelon',
+    title: 'Pear Biscuit',
     desc: 'Watermelon flavoured apple!',
     img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
   },
   {
-    title: 'Lemon Water',
+    title: 'Strawberry Pistachio',
     desc: 'Water flavoured lemon!',
     img: 'https://img.icons8.com/color/64/000000/fenix.png'
   },
   {
-    title: 'Apple Watermelon',
+    title: 'Cherry Salami',
     desc: 'Watermelon flavoured apple!',
     img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
   },
   {
-    title: 'Lemon Water',
+    title: 'Grape Cheddar',
     desc: 'Water flavoured lemon!',
     img: 'https://img.icons8.com/color/64/000000/fenix.png'
   },
   {
-    title: 'Lemon Water',
+    title: 'Peach Chicken',
     desc: 'Water flavoured lemon!',
     img: 'https://img.icons8.com/color/64/000000/fenix.png'
   },
