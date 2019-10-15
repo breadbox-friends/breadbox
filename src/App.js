@@ -23,7 +23,10 @@ function App() {
       <Container className='body-container'>
         <Row>
           <Col>
-            <FuzzySearchBar />
+            <FuzzySearchBar
+              setFuzzyResult={setGroceryItemList}
+              searchSpace={groceryItemList}
+            />
           </Col>
         </Row>
         <Row className='grocery-container-row'>
