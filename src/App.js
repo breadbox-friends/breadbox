@@ -15,6 +15,7 @@ import mockFetchedItems from './mockPayload';
 
 function App() {
   const [userSignedIn, setSignIn] = useState(false);
+  const [groceryItemList, setGroceryItemList] = useState(mockFetchedItems);
 
   return userSignedIn ? (
     <React.Fragment>
@@ -27,7 +28,7 @@ function App() {
         </Row>
         <Row className='grocery-container-row'>
           <Col className='grocery-container-col'>
-            {mockFetchedItems.map(item => (
+            {groceryItemList.map(item => (
                 <GroceryItem
                   itemTitle={item.title}
                   itemDesc={item.desc}
