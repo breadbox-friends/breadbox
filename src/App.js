@@ -42,6 +42,7 @@ function App() {
               inputMatchedHandler={searchResult => setGroceryItemList(searchResult)}
               searchSpace={mockFetchedItems}
               searchOptions={SEARCH_OPTIONS}
+              inputStatusEventCallback={status => console.log(status)}
             />
           </Col>
         </Row>
