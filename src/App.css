@@ -16,11 +16,24 @@
 
 .body-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   flex-grow: 0;
-  justify-content: space-evenly; 
+  align-items: center;
+  justify-content: space-evenly;
 }
+
+.grocery-container-col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.grocery-container-row {
+  justify-content: center;
+}
+
 
 
 /* Bootstrap Media Queries
