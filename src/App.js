@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import Container from 'react-bootstrap/Container';
-
 import MainNav from './MainNav/MainNav';
 import SignInScreen from './SignInScreen/SignInScreen';
 import GroceryItem from './GroceryItem/GroceryItem';
