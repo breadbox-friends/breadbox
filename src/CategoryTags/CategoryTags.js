@@ -8,16 +8,38 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 
+class Option {
+  constructor(categoryName) {
+    this.categoryName = categoryName;
+    this.isSelected = false;
+  }
+
+  name() {
+    return this.categoryName;
+  }
+
+  isSelected() {
+    return this.isSelected;
+  }
+
+  setSelected(isSelected) {
+    this.isSelected = isSelected;
+  }
+}
+
 const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
-  const [selectedCategories, setCategories] = useState([]);
+  const [selectedCategories, setCategories] = useState(
+    allOptions.map(optionName => new Option(optionName))
+  );
+
   const [showModal, setShowModal] = useState(false);
 
-  const renderCategoryButton = category => (
-    <Button key={category}>{category}</Button>
+  const renderCategoryButton = option => (
+    <Button key={option.name()}>{option.name()}</Button>
   )
 
-  const renderSelectedTagsField = categories =>
-    categories.map(category => <Badge variant="success" >{category}</Badge>);
+  const renderSelectedTagsField = options =>
+    options.map(option => <Badge variant="success" >{option.name()}</Badge>);
 
   return (
     <React.Fragment>
@@ -49,7 +71,7 @@ const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
           </Container>
           <hr />
           <div>
-            { allOptions.map(category => renderCategoryButton(category)) }
+            { selectedCategories.map(option => renderCategoryButton(option)) }
           </div>
         </Modal.Body>
         <Modal.Footer>
