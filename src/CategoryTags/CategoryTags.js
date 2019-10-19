@@ -10,7 +10,7 @@ import Badge from 'react-bootstrap/Badge';
 
 const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
   const [selectedCategories, setCategories] = useState([]);
-  const [isSelected, setSelected] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const renderCategoryButton = category => (
     <Button key={category}>{category}</Button>
@@ -21,12 +21,12 @@ const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
 
   return (
     <React.Fragment>
-      <Button onClick={() => setSelected(!isSelected)}>Categories</Button>
+      <Button onClick={() => setShowModal(!showModal)}>Categories</Button>
       <Modal
         centered
         size="lg"
-        show={isSelected}
-        onHide={() => setSelected(false)}>
+        show={showModal}
+        onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>What are you looking for?</Modal.Title>
         </Modal.Header>
@@ -53,10 +53,10 @@ const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setSelected(false)}>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => setSelected(false)}>
+          <Button variant="primary" onClick={() => setShowModal(false)}>
             Save Changes
           </Button>
         </Modal.Footer>
