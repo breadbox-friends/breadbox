@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 // Mock fetched payload
 import mockFetchedItems from './mockPayload';
+import CategoryTags from './CategoryTags/CategoryTags';
 
 const SEARCH_OPTIONS = {
   shouldSort: true,
@@ -60,6 +61,9 @@ function App() {
               searchOptions={SEARCH_OPTIONS}
               inputStatusEventCallback={status => setSearchStatus(status)}
             />
+          </Col>
+          <Col>
+            <CategoryTags></CategoryTags>
           </Col>
         </Row>
         <Row className='grocery-container-row'>
