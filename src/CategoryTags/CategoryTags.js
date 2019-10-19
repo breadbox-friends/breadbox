@@ -9,17 +9,9 @@ import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 
 class Option {
-  constructor(categoryName) {
-    this.categoryName = categoryName;
+  constructor(optionName) {
+    this.optionName = optionName;
     this.isSelected = false;
-  }
-
-  name() {
-    return this.categoryName;
-  }
-
-  isSelected() {
-    return this.isSelected;
   }
 
   setSelected(isSelected) {
@@ -27,19 +19,40 @@ class Option {
   }
 }
 
-const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
-  const [selectedCategories, setCategories] = useState(
-    allOptions.map(optionName => new Option(optionName))
+const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
+  const [allOptions, setOptions] = useState(
+    inputOptions.map(optionName => new Option(optionName))
   );
 
   const [showModal, setShowModal] = useState(false);
 
-  const renderCategoryButton = option => (
-    <Button key={option.name()}>{option.name()}</Button>
+  const renderOptionsButton = option => (
+    <Button
+      onClick={() => {
+        option.setSelected(!option.isSelected);
+        /*
+          This works, but I'm forcing a rerender here
+          since mutating the object with option.setSelected(!option.isSelected)
+          does not trigger an update. Is there a better way to do this?
+        */
+        setOptions([...allOptions]);
+      }}
+      key={option.optionName}>
+      {option.optionName}
+    </Button>
   )
 
-  const renderSelectedTagsField = options =>
-    options.map(option => <Badge variant="success" >{option.name()}</Badge>);
+  const renderAllOptionsField = options =>
+    options.map(option =>
+      (option.isSelected ?
+        (
+          <Badge key={option.optionName} variant="success" >
+            {option.optionName}
+          </Badge>
+        )
+        : null
+      )
+    )
 
   return (
     <React.Fragment>
@@ -56,7 +69,7 @@ const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
           <Container>
             <Row>
               <Col>
-                { renderSelectedTagsField(selectedCategories) }
+                { renderAllOptionsField(allOptions) }
               </Col>
               <Col>
                 <Form inline>
@@ -71,7 +84,7 @@ const CategoryTags = ({ allOptions = ["fish", "beef", "brocolli"]} ) => {
           </Container>
           <hr />
           <div>
-            { selectedCategories.map(option => renderCategoryButton(option)) }
+            { allOptions.map(option => renderOptionsButton(option)) }
           </div>
         </Modal.Body>
         <Modal.Footer>
