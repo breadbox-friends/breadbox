@@ -44,16 +44,16 @@ const CategoryTags = ({ inputOptions = ["beef", "cleaning products", "diet soda"
   )
 
   const renderUnselectedField = options =>
-    [...options]
-      .filter(o => !o.isSelected)
-      .sort((a, b) => a.optionName > b.optionName)
-      .map(o => renderUnselectedItem(o));
+    renderField(options, o => !o.isSelected, renderUnselectedItem);
 
   const renderSelectedField = options =>
+    renderField(options, o => o.isSelected, renderSelectedItem);
+
+  const renderField = (options, filterFn, renderFn) =>
     [...options]
-        .filter(o => o.isSelected)
-        .sort((a, b) => a.optionName > b.optionName)
-        .map(o => renderSelectedItem(o));
+      .filter(filterFn)
+      .sort((a, b) => a.optionName > b.optionName)
+      .map(renderFn);
 
   return (
     <React.Fragment>
