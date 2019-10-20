@@ -29,6 +29,10 @@ const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
     </Button>
   )
 
+  const renderSelectableOptions = options => {
+    return [...options].map(o => renderOptionButton(o)).sort((a, b) => a > b);
+  }
+
   const renderSelectedOptionsField = options =>
     options.map(option =>
       (option.isSelected ?
@@ -71,7 +75,8 @@ const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
           </Container>
           <hr />
           <div>
-            { allOptions.map(option => renderOptionButton(option)) }
+            { renderSelectableOptions(allOptions) }
+            {/* { allOptions.map(option => renderOptionButton(option)) } */}
           </div>
         </Modal.Body>
         <Modal.Footer>
