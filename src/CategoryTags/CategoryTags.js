@@ -16,23 +16,20 @@ const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const renderOptionsButton = option => (
+  const renderOptionButton = option => (
     <Button
       onClick={() => {
-        option.setSelected(!option.isSelected);
-        /*
-          This works, but I'm forcing a rerender here
-          since mutating the object with option.setSelected(!option.isSelected)
-          does not trigger an update. Is there a better way to do this?
-        */
-        setOptions([...allOptions]);
+        setOptions([
+          ...allOptions.filter(o => o.optionName !== option.optionName),
+          option.setSelected(!option.isSelected)
+        ]);
       }}
       key={option.optionName}>
       {option.optionName}
     </Button>
   )
 
-  const renderAllOptionsField = options =>
+  const renderSelectedOptionsField = options =>
     options.map(option =>
       (option.isSelected ?
         (
@@ -59,7 +56,7 @@ const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
           <Container>
             <Row>
               <Col>
-                { renderAllOptionsField(allOptions) }
+                { renderSelectedOptionsField(allOptions) }
               </Col>
               <Col>
                 <Form inline>
@@ -74,7 +71,7 @@ const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
           </Container>
           <hr />
           <div>
-            { allOptions.map(option => renderOptionsButton(option)) }
+            { allOptions.map(option => renderOptionButton(option)) }
           </div>
         </Modal.Body>
         <Modal.Footer>

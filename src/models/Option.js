@@ -1,11 +1,14 @@
 class Option {
-  constructor(optionName) {
+  constructor(optionName, isSelected = false) {
     this.optionName = optionName;
-    this.isSelected = false;
+    this.isSelected = isSelected;
   }
 
   setSelected(isSelected) {
-    this.isSelected = isSelected;
+    return Object.assign(
+      Object.create(this),
+      { isSelected: isSelected}
+    );
   }
 }
 
