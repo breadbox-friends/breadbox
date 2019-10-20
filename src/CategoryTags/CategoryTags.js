@@ -7,11 +7,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
-import Option from '../models/Option';
+import Option, { optionSort } from '../models/Option';
 
-const CategoryTags = ({ inputOptions = ["beef", "cleaning products", "diet soda"] }) => {
+const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"] }) => {
   const [allOptions, setOptions] = useState(
-    inputOptions.map(optionName => new Option(optionName))
+    inputOptions.map(optionName => new Option(optionName)).sort(optionSort)
   );
 
   const [showModal, setShowModal] = useState(false);
@@ -24,14 +24,14 @@ const CategoryTags = ({ inputOptions = ["beef", "cleaning products", "diet soda"
           option.setSelected(!option.isSelected)
         ]);
       }}
-      key={option.optionName}>
+      key={`unselected-${option.optionName}`}>
       {option.optionName}
     </Button>
   )
 
   const renderSelectedItem = option => (
     <Badge
-      key={option.optionName}
+      key={`selected-${option.optionName}`}
       variant="success"
       onClick={() => {
         setOptions([
@@ -52,7 +52,7 @@ const CategoryTags = ({ inputOptions = ["beef", "cleaning products", "diet soda"
   const renderField = (options, filterFn, renderFn) =>
     [...options]
       .filter(filterFn)
-      .sort((a, b) => a.optionName > b.optionName)
+      .sort(optionSort)
       .map(renderFn);
 
   return (
