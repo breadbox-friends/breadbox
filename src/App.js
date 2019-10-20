@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import Container from 'react-bootstrap/Container';
-
 import MainNav from './MainNav/MainNav';
 import SignInScreen from './SignInScreen/SignInScreen';
 import GroceryItem from './GroceryItem/GroceryItem';
@@ -29,6 +28,23 @@ const SEARCH_OPTIONS = {
 function App() {
   const [userSignedIn, setSignIn] = useState(false);
   const [groceryItemList, setGroceryItemList] = useState(mockFetchedItems);
+  const [searchStatus, setSearchStatus] = useState({status: null});
+
+  const renderGroceryList = groceryItemList => {
+    return searchStatus.status === 'NO_MATCHES' ? (
+      <p> No matches! :( Try searching for something else</p>
+    ) : (
+      groceryItemList.map(item => (
+        <GroceryItem
+          itemTitle={item.title}
+          itemDesc={item.desc}
+          imgUrl={item.img}
+          // replace with item.id in the future
+          key={item.title}
+        />
+      ))
+    )
+  }
 
   return userSignedIn ? (
     <React.Fragment>
@@ -42,20 +58,13 @@ function App() {
               inputMatchedHandler={searchResult => setGroceryItemList(searchResult)}
               searchSpace={mockFetchedItems}
               searchOptions={SEARCH_OPTIONS}
+              inputStatusEventCallback={status => setSearchStatus(status)}
             />
           </Col>
         </Row>
         <Row className='grocery-container-row'>
           <Col className='grocery-container-col'>
-            {groceryItemList.map(item => (
-                <GroceryItem
-                  itemTitle={item.title}
-                  itemDesc={item.desc}
-                  imgUrl={item.img}
-                  // replace with item.id in the future
-                  key={item.title}
-                />
-            ))}
+            { renderGroceryList(groceryItemList) }
           </Col>
         </Row>
       </Container>
