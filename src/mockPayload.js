@@ -1,12 +1,5 @@
 import breadbox from "../src/assets/breadbox.png";
-
-const renderWithOfflineFallback = (imgSrcThunkable, fallback) => {
-  if(process.env["REACT_APP_OFFLINE_MODE"]) {
-    return fallback;
-  } else {
-    return (typeof imgSrcThunkable) === "function" ? imgSrcThunkable() : imgSrcThunkable
-  }
-}
+import { renderWithOfflineFallback } from './utils/offlineFallbacks';
 
 const mockFetchedItems = [
   {

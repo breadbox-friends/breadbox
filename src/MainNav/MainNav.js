@@ -11,15 +11,8 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import UserIcon from '../UserIcon/UserIcon';
 import slowpoke from '../assets/slowpoke.png';
+import { renderWithOfflineFallback } from '../utils/offlineFallbacks';
 import breadbox from '../assets/breadbox.png';
-
-const renderWithOfflineFallback = (imgSrcThunkable, fallback) => {
-  if(process.env["REACT_APP_OFFLINE_MODE"]) {
-    return fallback;
-  } else {
-    return (typeof imgSrcThunkable) === "function" ? imgSrcThunkable() : imgSrcThunkable
-  }
-}
 
 const MainNav = () => (
   <Navbar bg="light" expand="lg">
@@ -27,7 +20,7 @@ const MainNav = () => (
       <Navbar.Brand href="#home">
         <img
           src={
-            renderWithOfflineFallback("https://img.icons8.com/cotton/64/000000/toast--v1.png", )
+            renderWithOfflineFallback("https://img.icons8.com/cotton/64/000000/toast--v1.png", breadbox)
           }
           alt="logo"
         />

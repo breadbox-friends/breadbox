@@ -1,2 +1,2 @@
 #!/bin/bash -eu
-$1 yarn start
+yarn start
