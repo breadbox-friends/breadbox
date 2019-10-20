@@ -7,17 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
-
-class Option {
-  constructor(optionName) {
-    this.optionName = optionName;
-    this.isSelected = false;
-  }
-
-  setSelected(isSelected) {
-    this.isSelected = isSelected;
-  }
-}
+import Option from '../models/Option';
 
 const CategoryTags = ({ inputOptions = ["fish", "beef", "brocolli"] }) => {
   const [allOptions, setOptions] = useState(
