@@ -10,20 +10,35 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import UserIcon from '../UserIcon/UserIcon';
+import slowpoke from '../assets/slowpoke.png';
+import breadbox from '../assets/breadbox.png';
+
+const renderWithOfflineFallback = (imgSrcThunkable, fallback) => {
+  if(process.env["REACT_APP_OFFLINE_MODE"]) {
+    return fallback;
+  } else {
+    return (typeof imgSrcThunkable) === "function" ? imgSrcThunkable() : imgSrcThunkable
+  }
+}
 
 const MainNav = () => (
   <Navbar bg="light" expand="lg">
     <Container>
       <Navbar.Brand href="#home">
         <img
-          src="https://img.icons8.com/cotton/64/000000/toast--v1.png"
+          src={
+            renderWithOfflineFallback("https://img.icons8.com/cotton/64/000000/toast--v1.png", )
+          }
           alt="logo"
         />
         {"Breadbox"}
       </Navbar.Brand>
       <Row>
         <Col className="col-user-icon">
-          <UserIcon iconSrc={firebase.auth().currentUser.photoURL} />
+          <UserIcon iconSrc={
+              renderWithOfflineFallback(() => firebase.auth().currentUser.photoURL, slowpoke)
+            }
+          />
         </Col>
         <Col className="col-nav-burger">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

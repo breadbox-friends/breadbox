@@ -46,7 +46,7 @@ function App() {
     )
   }
 
-  return userSignedIn ? (
+  return userSignedIn || process.env["REACT_APP_OFFLINE_MODE"] ? (
     <React.Fragment>
       <MainNav />
       <Container className='body-container'>
