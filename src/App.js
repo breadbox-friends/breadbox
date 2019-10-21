@@ -63,7 +63,7 @@ function App() {
             />
           </Col>
           <Col>
-            <CategoryTags></CategoryTags>
+            <CategoryTags />
           </Col>
         </Row>
         <Row className='grocery-container-row'>
@@ -79,7 +79,6 @@ function App() {
           }}
         >Click here to sign-out
       </button>
-
     </React.Fragment>
   ) : (
     <SignInScreen setSignInState={setSignIn} />

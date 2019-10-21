@@ -19,9 +19,10 @@ const MainNav = () => (
     <Container>
       <Navbar.Brand href="#home">
         <img
-          src={
-            renderWithOfflineFallback("https://img.icons8.com/cotton/64/000000/toast--v1.png", breadbox)
-          }
+          src={renderWithOfflineFallback(
+                "https://img.icons8.com/cotton/64/000000/toast--v1.png",
+                breadbox)
+              }
           alt="logo"
         />
         {"Breadbox"}
