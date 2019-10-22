@@ -7,11 +7,23 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
-import Option, { optionSort } from '../models/Option';
+
+const optionSort = (option1, option2) => {
+  const { optionName: o1 } = option1;
+  const { optionName: o2 } = option2;
+
+  if (o1 > o2) {
+    return 1;
+  } else if (o2 > o1) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
 
 const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"] }) => {
   const [allOptions, setOptions] = useState(
-    inputOptions.map(optionName => new Option(optionName)).sort(optionSort)
+    inputOptions.map(optionName => ({ optionName: optionName, isSelected: false }) ).sort(optionSort)
   );
 
   const [showModal, setShowModal] = useState(false);
@@ -21,7 +33,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
       onClick={() => {
         setOptions([
           ...allOptions.filter(o => o.optionName !== option.optionName),
-          option.setSelected(!option.isSelected)
+          Object.assign(option, {isSelected: !option.isSelected})
         ]);
       }}
       key={`unselected-${option.optionName}`}>
@@ -36,7 +48,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
       onClick={() => {
         setOptions([
           ...allOptions.filter(o => o.optionName !== option.optionName),
-          option.setSelected(!option.isSelected)
+          Object.assign(option, {isSelected: !option.isSelected})
         ]);
       }}>
       {option.optionName}
