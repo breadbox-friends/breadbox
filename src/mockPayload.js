@@ -1,38 +1,41 @@
+import breadbox from "../src/assets/breadbox.png";
+import { renderWithOfflineFallback } from './utils/offlineFallbacks';
+
 const mockFetchedItems = [
   {
     title: 'Apple Watermelon',
-    desc: 'Now with added melon!',
-    img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
+    desc: 'Watermelon flavoured apple!',
+    img: renderWithOfflineFallback('https://img.icons8.com/dusk/64/000000/unicorn.png', breadbox)
   },
   {
     title: 'Lemon Water',
-    desc: 'Not suitable for flight',
-    img: 'https://img.icons8.com/color/64/000000/fenix.png'
+    desc: 'Water flavoured lemon!',
+    img: renderWithOfflineFallback('https://img.icons8.com/color/64/000000/fenix.png', breadbox)
   },
   {
     title: 'Pear Biscuit',
-    desc: 'Very fragile',
-    img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
+    desc: 'Watermelon flavoured apple!',
+    img: renderWithOfflineFallback('https://img.icons8.com/dusk/64/000000/unicorn.png', breadbox)
   },
   {
     title: 'Strawberry Pistachio',
-    desc: 'Batteries sold separately',
-    img: 'https://img.icons8.com/color/64/000000/fenix.png'
+    desc: 'Water flavoured lemon!',
+    img: renderWithOfflineFallback('https://img.icons8.com/color/64/000000/fenix.png', breadbox)
   },
   {
     title: 'Cherry Salami',
-    desc: 'Impossible to digest',
-    img: 'https://img.icons8.com/dusk/64/000000/unicorn.png'
+    desc: 'Watermelon flavoured apple!',
+    img: renderWithOfflineFallback('https://img.icons8.com/dusk/64/000000/unicorn.png', breadbox)
   },
   {
     title: 'Grape Cheddar',
-    desc: 'Non-alcoholic',
-    img: 'https://img.icons8.com/color/64/000000/fenix.png'
+    desc: 'Water flavoured lemon!',
+    img: renderWithOfflineFallback('https://img.icons8.com/color/64/000000/fenix.png', breadbox)
   },
   {
     title: 'Peach Chicken',
-    desc: 'Consult your doctor first',
-    img: 'https://img.icons8.com/color/64/000000/fenix.png'
+    desc: 'Water flavoured lemon!',
+    img: renderWithOfflineFallback('https://img.icons8.com/dusk/64/000000/unicorn.png', breadbox)
   },
  ]
 
