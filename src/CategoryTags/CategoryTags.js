@@ -27,7 +27,10 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning 
 
   const renderUnselectedItem = option => (
     <Button
-      onClick={() => setUnselectedOptions(unselectedOptions.filter(e => e !== option)) }
+      onClick={() => {
+        setUnselectedOptions(unselectedOptions.filter(e => e !== option));
+        setUserInput("");
+      }}
       key={`unselected-${option}`}>
       {option}
     </Button>
@@ -73,6 +76,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning 
                   type="text"
                   placeholder="Search"
                   className="mr-sm-2"
+                  value={userInput}
                   onChange={inputEvent => setUserInput(inputEvent.target.value)}
                 />
               </Form>
