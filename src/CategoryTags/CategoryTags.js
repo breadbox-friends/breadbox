@@ -8,14 +8,27 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 
-const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"] }) => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+const SEARCH_OPTIONS = {
+  shouldSort: true,
+  threshold: 0.2,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [
+    "title",
+    "desc"
+  ]
+};
+
+const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning products"] }) => {
+  const [unselectedOptions, setUnselectedOptions] = useState(inputOptions);
 
   const [showModal, setShowModal] = useState(false);
 
   const renderUnselectedItem = option => (
     <Button
-      onClick={() => setSelectedOptions([...selectedOptions, option]) }
+      onClick={() => setUnselectedOptions(unselectedOptions.filter(e => e !== option)) }
       key={`unselected-${option}`}>
       {option}
     </Button>
@@ -25,7 +38,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
     <Badge
       key={`selected-${option}`}
       variant="success"
-      onClick={() => setSelectedOptions(selectedOptions.filter(e => e !== option )) }>
+      onClick={() => setUnselectedOptions([...unselectedOptions, option]) }>
       {option}
     </Badge>
   )
@@ -50,7 +63,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
           <Container>
             <Row>
               <Col>
-                { renderField(selectedOptions, renderSelectedItem) }
+                { renderField(inputOptions.filter(option => !unselectedOptions.includes(option)), renderSelectedItem) }
               </Col>
               <Col>
                 <Form inline>
@@ -65,7 +78,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
           </Container>
           <hr />
           <div>
-            { renderField(inputOptions.filter(option => !selectedOptions.includes(option)), renderUnselectedItem) }
+            { renderField(unselectedOptions, renderUnselectedItem) }
           </div>
         </Modal.Body>
         <Modal.Footer>
