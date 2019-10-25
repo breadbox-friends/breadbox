@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Container from 'react-bootstrap/Container';
+import Fuse from 'fuse.js';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 
 const SEARCH_OPTIONS = {
   shouldSort: true,
-  threshold: 0.2,
+  threshold: 0.3,
   location: 0,
   distance: 100,
   maxPatternLength: 32,
-  minMatchCharLength: 1,
-  keys: [
-    "title",
-    "desc"
-  ]
+  minMatchCharLength: 2,
 };
 
 const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning products"] }) => {
-  const [unselectedOptions, setUnselectedOptions] = useState(inputOptions);
+  const [unselectedOptions, setUnselectedOptions] = useState(inputOptions.sort());
+
+  const [userInput, setUserInput] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -48,6 +47,9 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning 
       .sort()
       .map(renderFn);
 
+  const performSearch = (searchSpace, searchInput) =>
+    new Fuse(searchSpace, SEARCH_OPTIONS).search(searchInput);
+
   return (
     <React.Fragment>
       <Button onClick={() => setShowModal(!showModal)}>Categories</Button>
@@ -66,19 +68,24 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning 
                 { renderField(inputOptions.filter(option => !unselectedOptions.includes(option)), renderSelectedItem) }
               </Col>
               <Col>
-                <Form inline>
-                  <FormControl
-                    type="text"
-                    placeholder="Search"
-                    className="mr-sm-2"
-                  />
-                </Form>
+              <Form inline>
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                  onChange={inputEvent => setUserInput(inputEvent.target.value)}
+                />
+              </Form>
               </Col>
             </Row>
           </Container>
           <hr />
           <div>
-            { renderField(unselectedOptions, renderUnselectedItem) }
+            { renderField(
+              userInput === '' ?
+                unselectedOptions :
+                performSearch(unselectedOptions, userInput).map(n => unselectedOptions[n]),
+              renderUnselectedItem) }
           </div>
         </Modal.Body>
         <Modal.Footer>
