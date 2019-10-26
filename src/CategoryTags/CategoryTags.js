@@ -1,21 +1,36 @@
 import React, { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Container from 'react-bootstrap/Container';
+import Fuse from 'fuse.js';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 
-const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"] }) => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+const SEARCH_OPTIONS = {
+  shouldSort: true,
+  threshold: 0.3,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 2,
+};
+
+const CategoryTags = ({ inputOptions = ["diet soda", "beans", "beef", "cleaning products"] }) => {
+  const [unselectedOptions, setUnselectedOptions] = useState(inputOptions.sort());
+
+  const [userInput, setUserInput] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
   const renderUnselectedItem = option => (
     <Button
-      onClick={() => setSelectedOptions([...selectedOptions, option]) }
+      onClick={() => {
+        setUnselectedOptions(unselectedOptions.filter(e => e !== option));
+        setUserInput("");
+      }}
       key={`unselected-${option}`}>
       {option}
     </Button>
@@ -25,7 +40,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
     <Badge
       key={`selected-${option}`}
       variant="success"
-      onClick={() => setSelectedOptions(selectedOptions.filter(e => e !== option )) }>
+      onClick={() => setUnselectedOptions([...unselectedOptions, option]) }>
       {option}
     </Badge>
   )
@@ -34,6 +49,9 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
     [...options]
       .sort()
       .map(renderFn);
+
+  const performSearch = (searchSpace, searchInput) =>
+    new Fuse(searchSpace, SEARCH_OPTIONS).search(searchInput);
 
   return (
     <React.Fragment>
@@ -50,22 +68,28 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
           <Container>
             <Row>
               <Col>
-                { renderField(selectedOptions, renderSelectedItem) }
+                { renderField(inputOptions.filter(option => !unselectedOptions.includes(option)), renderSelectedItem) }
               </Col>
               <Col>
-                <Form inline>
-                  <FormControl
-                    type="text"
-                    placeholder="Search"
-                    className="mr-sm-2"
-                  />
-                </Form>
+              <Form inline>
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                  value={userInput}
+                  onChange={inputEvent => setUserInput(inputEvent.target.value)}
+                />
+              </Form>
               </Col>
             </Row>
           </Container>
           <hr />
           <div>
-            { renderField(inputOptions.filter(option => !selectedOptions.includes(option)), renderUnselectedItem) }
+            { renderField(
+              userInput === '' ?
+                unselectedOptions :
+                performSearch(unselectedOptions, userInput).map(n => unselectedOptions[n]),
+              renderUnselectedItem) }
           </div>
         </Modal.Body>
         <Modal.Footer>
