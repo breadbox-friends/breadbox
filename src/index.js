@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 if(!process.env["REACT_APP_OFFLINE_MODE"]) {
   const initFirebase = () => {
     const firebaseConfig = {
-      apiKey: "AIzaSyBWnD-fAKyjvju6C0UEA4llv7CAdFw3tmg",
+      apiKey: "AIzaSyDqy-2VOZr7Q8cswR-DAnHfWyie8s915O8",
       authDomain: "breadbox-c329f.firebaseapp.com",
       databaseURL: "https://breadbox-c329f.firebaseio.com",
       projectId: "breadbox-c329f",
