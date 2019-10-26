@@ -8,63 +8,31 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 
-const optionSort = (option1, option2) => {
-  const { optionName: o1 } = option1;
-  const { optionName: o2 } = option2;
-
-  if (o1 > o2) {
-    return 1;
-  } else if (o2 > o1) {
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
 const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"] }) => {
-  const [allOptions, setOptions] = useState(
-    inputOptions.map(optionName => ({ optionName: optionName, isSelected: false }) ).sort(optionSort)
-  );
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
 
   const renderUnselectedItem = option => (
     <Button
-      onClick={() => {
-        setOptions([
-          ...allOptions.filter(o => o.optionName !== option.optionName),
-          Object.assign(option, {isSelected: !option.isSelected})
-        ]);
-      }}
-      key={`unselected-${option.optionName}`}>
-      {option.optionName}
+      onClick={() => setSelectedOptions([...selectedOptions, option]) }
+      key={`unselected-${option}`}>
+      {option}
     </Button>
   )
 
   const renderSelectedItem = option => (
     <Badge
-      key={`selected-${option.optionName}`}
+      key={`selected-${option}`}
       variant="success"
-      onClick={() => {
-        setOptions([
-          ...allOptions.filter(o => o.optionName !== option.optionName),
-          Object.assign(option, {isSelected: !option.isSelected})
-        ]);
-      }}>
-      {option.optionName}
+      onClick={() => setSelectedOptions(selectedOptions.filter(e => e !== option )) }>
+      {option}
     </Badge>
   )
 
-  const renderUnselectedField = options =>
-    renderField(options, o => !o.isSelected, renderUnselectedItem);
-
-  const renderSelectedField = options =>
-    renderField(options, o => o.isSelected, renderSelectedItem);
-
-  const renderField = (options, filterFn, renderFn) =>
+  const renderField = (options, renderFn) =>
     [...options]
-      .filter(filterFn)
-      .sort(optionSort)
+      .sort()
       .map(renderFn);
 
   return (
@@ -82,7 +50,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
           <Container>
             <Row>
               <Col>
-                { renderSelectedField(allOptions) }
+                { renderField(selectedOptions, renderSelectedItem) }
               </Col>
               <Col>
                 <Form inline>
@@ -97,7 +65,7 @@ const CategoryTags = ({ inputOptions = ["diet soda", "beef", "cleaning products"
           </Container>
           <hr />
           <div>
-            { renderUnselectedField(allOptions) }
+            { renderField(inputOptions.filter(option => !selectedOptions.includes(option)), renderUnselectedItem) }
           </div>
         </Modal.Body>
         <Modal.Footer>
