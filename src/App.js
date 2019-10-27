@@ -6,9 +6,8 @@ import MainNav from './MainNav/MainNav';
 import SignInScreen from './SignInScreen/SignInScreen';
 import GroceryItem from './GroceryItem/GroceryItem';
 import GroceryClickModal from './GroceryClickModal';
-import FuzzySearchBar from './FuzzySearchBar/FuzzySearchBar';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import FuzzySearchBar from './FuzzySearchBar';
+import { Container, Grid } from 'semantic-ui-react';
 
 // Mock fetched payload
 import mockFetchedItems from './mockPayload';
@@ -33,7 +32,7 @@ function App() {
   const [searchStatus, setSearchStatus] = useState({status: null});
 
   const renderGroceryList = groceryItemList => {
-    return searchStatus.status === 'NO_MATCHES' ? (
+    return searchStatus.status === "NO_MATCHES" ? (
       <p> No matches! :( Try searching for something else</p>
     ) : (
       groceryItemList.map(item => (
