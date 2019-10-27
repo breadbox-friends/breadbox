@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import MainNav from './MainNav/MainNav';
 import SignInScreen from './SignInScreen/SignInScreen';
 import GroceryItem from './GroceryItem/GroceryItem';
+import GroceryClickModal from './GroceryClickModal';
 import FuzzySearchBar from './FuzzySearchBar/FuzzySearchBar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -36,13 +37,13 @@ function App() {
       <p> No matches! :( Try searching for something else</p>
     ) : (
       groceryItemList.map(item => (
-        <GroceryItem
-          itemTitle={item.title}
-          itemDesc={item.desc}
-          imgUrl={item.img}
-          // replace with item.id in the future
-          key={item.title}
-        />
+        <GroceryClickModal key={item.title}>
+          <GroceryItem
+            itemTitle={item.title}
+            itemDesc={item.desc}
+            imgUrl={item.img}
+          />
+        </GroceryClickModal>
       ))
     )
   }
