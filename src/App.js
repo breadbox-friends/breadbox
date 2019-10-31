@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import MainNav from './MainNav/MainNav';
 import SignInScreen from './SignInScreen/SignInScreen';
 import GroceryItem from './GroceryItem/GroceryItem';
 import GroceryClickModal from './GroceryClickModal';
 import FuzzySearchBar from './FuzzySearchBar';
-import { Container, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 // Mock fetched payload
 import mockFetchedItems from './mockPayload';
