@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import MainNav from './MainNav/MainNav';
 import SignInScreen from './SignInScreen/SignInScreen';
 import GroceryItem from './GroceryItem/GroceryItem';
-import FuzzySearchBar from './FuzzySearchBar/FuzzySearchBar';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import GroceryClickModal from './GroceryClickModal';
+import FuzzySearchBar from './FuzzySearchBar';
+import { Grid } from 'semantic-ui-react';
 
 // Mock fetched payload
 import mockFetchedItems from './mockPayload';
@@ -32,17 +34,17 @@ function App() {
   const [searchStatus, setSearchStatus] = useState({status: null});
 
   const renderGroceryList = groceryItemList => {
-    return searchStatus.status === 'NO_MATCHES' ? (
+    return searchStatus.status === "NO_MATCHES" ? (
       <p> No matches! :( Try searching for something else</p>
     ) : (
       groceryItemList.map(item => (
-        <GroceryItem
-          itemTitle={item.title}
-          itemDesc={item.desc}
-          imgUrl={item.img}
-          // replace with item.id in the future
-          key={item.title}
-        />
+        <GroceryClickModal key={item.title}>
+          <GroceryItem
+            itemTitle={item.title}
+            itemDesc={item.desc}
+            imgUrl={item.img}
+          />
+        </GroceryClickModal>
       ))
     )
   }

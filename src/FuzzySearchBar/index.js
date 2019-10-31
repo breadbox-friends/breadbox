@@ -1,6 +1,5 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
+import { Form } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 
 const STATUS_NO_INPUT = {status: 'NO_INPUT'};
@@ -15,7 +14,6 @@ const FuzzySearchBar = ({
   searchOptions,
   inputStatusEventCallback = f => f
 }) => {
-
   const performSearch = searchInput =>
     new Fuse(searchSpace, searchOptions).search(searchInput);
 
@@ -38,11 +36,10 @@ const FuzzySearchBar = ({
   }
 
   return (
-    <Form inline>
-      <FormControl
-        type="text"
-        placeholder="Search"
-        className="mr-sm-2"
+    <Form>
+      <Form.Input
+        fluid
+        placeholder='Search for something'
         onChange={inputEvent => handleChange(inputEvent)}
       />
     </Form>
