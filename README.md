@@ -1,5 +1,6 @@
 # breadbox
-Let's do groceries with Firebase 🔥and React ⚛️
+Let's do groceries with Firebase 🔥and React.
+Just messing around with the idea :)
 
 # Run it locally
 ## Start server
